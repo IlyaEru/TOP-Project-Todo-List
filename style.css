@@ -1,5 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Source+Sans+Pro&display=swap');
 body{
- 
     min-height: 100vh;
     display: flex;
     flex-direction: column;
@@ -7,6 +7,186 @@ body{
     justify-content: space-between;
     margin: 0;
     text-align: center;
+    font-family: 'Source Sans Pro', sans-serif;
+}
+.btn{
+    background: none;
+    color: inherit;
+    border: 0.1px solid white;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
+    margin: 0;
+    border: 0;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.btn:active{
+    transform: scale(0.97);
+}
+/* Header */
+header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    gap: 0.4vw;
+    background: #66cdaa9c;
+    padding-left: 2vw;
+}
+.icon{
+    height: 2vw;
+}
+.hero{
+    margin: 0;
+    font-size: 2vw;
+    color: cornflowerblue;
+}
+/* Main */
+.active{
+    font-weight: bold;
+    border-bottom: 3px solid #03a9f4;
+}
+.projects-close, .hidden{
+    display: none;
+}
+main{
+    display: flex;
+    flex: 1;
+    width: 100%;
+    background: aliceblue;
+}
+.menu{
+    font-size: 2vw;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: #cfe2f3;
+    padding-top: 3vw;
+
+}
+.proj-header-container {
+    display: flex;
+    width: 100%;
+    JUSTIFY-CONTENT: center;
+    position: relative;
+    align-items: center;
+}
+h2.proj-header {
+    margin: 0;
+    font-size: inherit;
+}
+#add-proj-btn {
+    position: absolute;
+    right: 2vw;
+}
+.new-proj-name{
+    font-size: inherit;
+    background: transparent;
+    border: none;
+    border-bottom: 2px solid;
+}
+.new-proj-name:active, .new-proj-name:focus{
+    outline: none;
+}
+ul.projects-content {
+    margin: 0;
+}
+li button {
+    display: flex;
+    align-items: center;
+}
+.home-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px dashed;
+    width: 80%;
+    padding-bottom: 0.5vw;
+}
+.menu-img {
+    height: 2vw;
+}
+.proj-img{
+    height: 2vw;
+}
+ul li {
+    list-style: none;
+    display: flex;
+    gap: 0.6vw;
+    position: relative;
+}
+.project-name-node {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5vw;
+}
+.change-proj-btn{
+    margin-left: auto;
+}
+.new-proj-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.3vw;
+    margin-top: 2vw;
+    background: whitesmoke;
+    padding: 1vw;
+    border-radius: 20px;
+}
+.new-proj-header {
+    margin: 0;
+    font-size: inherit;
+    background: #a1e0cb9c;
+    width: 20vw;
+    height: 3vw;
+    border-radius: 10px;
+}
+.input {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    
+
+}
+#proj-name {
+    height: 2vw;
+    border: 0;
+    background: inherit;
+    border-bottom: 3px solid rgba(0, 0, 0, 0.637);
+    font-size: inherit;
+}
+label {
+    position: absolute;
+    font-size: 1vw;
+}
+#proj-name:active, #proj-name:focus{
+    outline: none;
+    border: 0;
+    border-bottom: 3px solid black;
+}
+#proj-name:valid ~ label, #proj-name:focus ~ label{
+    transform: translateY(-2vw);
+}
+.add-proj-btns {
+    display: flex;
+    gap: 4vw;
+    margin-top: 1vw;
+}
+.add-proj-btns button {
+    background: #c1e8dba3;
+    width: 7vw;
+    border-radius: 22px;
+}
+form.hidden{
+    display: none;
+}
+.content {
+    flex: 2.5;
 }
 /* Footer */
 footer{
