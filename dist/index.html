@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="icon" href="./img/icon.png">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To Do</title>
+    <script src="main.js" defer></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <header>
+        <img class="icon" src="./img/icon.png" alt="site icon">
+        <h1 class="hero">Just TODO it</h1>
+    </header>
+    <main>
+        <div class="menu">
+            <div class="home-container">
+                <button class="home-btn btn"><img class="menu-img" src="./img/home.png" alt="home image"></button>
+                <button class="home-btn btn active">Home</button>
+            </div>
+
+            <div class="proj-header-container">
+                <button class="btn show-proj" id="direc-img-btn"><img class="menu-img proj-direction-img direc-right" src="./img/right.png"
+                        alt="projects icon">
+                </button>
+                <button class="btn show-proj" id="projects-btn">
+                    <h2 class="proj-header ">Projects</h2>
+                </button>
+                <button id="add-proj-btn" title="Add new project" class="btn add-proj-btn"><img class="menu-img" src="./img/plus.png"
+                    alt="add project button"></button>
+            </div>
+            <ul class="projects-content projects-close">
+            </ul>
+            
+            <form class="new-proj-form hidden">
+                <h3 class="new-proj-header">Add new project</h3>
+                <div class="input">
+                   
+                    <input type="text" maxlength="24" id="proj-name" required>
+                    <label for="proj-name">Project Name</label>
+                </div>
+                <div class="add-proj-btns"><button class="btn cancel-btn">Cancel</button><button class="btn"
+                        type="submit">Add</button>
+                </div>
+
+
+            </form>
+        </div>
+        </div>
+        <div class="content">
+            <h2 class="content-header">Home</h2>
+        </div>
+    </main>
+    <footer>
+        <a href="https://github.com/IlyaEru"><img src="img/github.png" alt="github link"></a>
+        <a class='gitHub-name' href="https://github.com/IlyaEru">IlyaEru</a>
+    </footer>
+</body>
+
+</html>
