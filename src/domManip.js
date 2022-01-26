@@ -64,7 +64,7 @@ export const menuDomManipulation = (function (){
             deleteProjNode.title = "Delete this project";
             const deleteProjImg = document.createElement('img');
             deleteProjImg.classList.add('proj-img', 'delete-proj-img');
-            deleteProjImg.src = './img/delete.js';
+            deleteProjImg.src = './img/delete.png';
             deleteProjImg.alt = 'delete project icon';
             deleteProjNode.appendChild(deleteProjImg);
 
@@ -87,6 +87,7 @@ export const menuDomManipulation = (function (){
         const projIndex = projects.indexOf(projName);
         projects.splice(projIndex, 1);
         renderProjects();
+        projectsModule.initial()
     }
     function changeProjName() {
         const projNameNode = this.parentNode.querySelector('.project-name-node');
