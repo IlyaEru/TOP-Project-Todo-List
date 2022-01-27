@@ -19,7 +19,7 @@
     <main>
         <div class="menu">
             <div class="home-container">
-                <button class="home-btn btn"><img class="menu-img" src="./img/home.png" alt="home image"></button>
+                <img class="menu-img" src="./img/home.png" alt="home image">
                 <button class="home-btn btn active">Home</button>
             </div>
 
@@ -52,7 +52,40 @@
         </div>
         </div>
         <div class="content">
-            <h2 class="content-header">Home</h2>
+            <div class="content-header"><h2 >Home</h2>
+            <button class="btn add-todo-btn"><img class="add-todo-img" src="./img/plus.png" alt="add new todo"></button></div>
+            <div class="modal hidden" id="new-todo-modal">
+                <div class="modal-content">
+                    <form class="new-todo-form">
+                        <h3 class="new-todo-header">Add new Todo</h3>
+                        <div class="input">
+                            <input type="text" id="new-todo-name" required>
+                            <label class="name-label" for="new-todo-name">Description</label>
+                        </div>
+                        <div class="input">
+                            <input type="date" value="2022-01-01" id="new-todo-date">
+                            <label class="date-label"  for="new-todo-date">Date</label>
+                        </div>
+                        <div class="new-todo-btns">
+                            <button class="btn cancel-new-todo">Cancel</button>
+                            <button class="btn add-new-todo">Add</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="to-dos">
+                    <li><button class="todo-checkbox"></button><p class="todo-text">Coffee</p> 
+                        <input class="todo-date" type="date" name="todo-date" >
+                    <button class="btn change-todo-btn"><img class="todo-img" src="./img/change.png" alt="delete todo button"></button>
+                <button class="btn delete-todo-btn"><img class="todo-img" src="./img/delete.png" alt=""></button></li>
+                <li><button class="todo-checkbox"></button> <p class="todo-text">Tea</p> 
+                    <button class="btn change-todo-btn"><img class="todo-img" src="./img/change.png" alt="delete todo button"></button>
+                <button class="btn delete-todo-btn"><img class="todo-img" src="./img/delete.png" alt=""></button></li>
+                <li><button class="todo-checkbox"></button> <p class="todo-text">Milk</p> 
+                    <button class="btn change-todo-btn"><img class="todo-img" src="./img/change.png" alt="delete todo button"></button>
+                <button class="btn delete-todo-btn"><img class="todo-img" src="./img/delete.png" alt=""></button></li>
+            </div>
+            
         </div>
     </main>
     <footer>
