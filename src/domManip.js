@@ -1,11 +1,17 @@
 import { projectsModule } from "./projects";
 import { toDosContent } from "./toDos";
 export const menuDomManipulation = (function () {
+    let projects;
+    const localProjects = window.localStorage.getItem('MyProjects');
+    if (localProjects === null){
+        projects = ['Example project'];
+    }
+    else projects = JSON.parse(localProjects);
     const projHeaderImg = document.querySelector('.proj-direction-img');
     const projCotent = document.querySelector('.projects-content');
     const addProjForm = document.querySelector('.new-proj-form');
     const projectDiv = document.querySelector('.projects-content');
-    let projects = ['Example project']
+    
     function toogleProjects() {
         if (projHeaderImg.classList.contains('direc-right')) {
             projHeaderImg.src = './img/down.png';
@@ -61,6 +67,11 @@ export const menuDomManipulation = (function () {
             changeProjImg.alt = 'change project icon';
             changeProjNode.appendChild(changeProjImg);
 
+            const todoCountNode = document.createElement('span');
+            todoCountNode.classList.add('todo-count');
+
+            todoCountNode.textContent = toDosContent.checkTodoProjectCount(project);
+
             const deleteProjNode = document.createElement('button');
             deleteProjNode.classList.add('btn', 'delete-proj-btn');
             deleteProjNode.title = "Delete this project";
@@ -70,9 +81,10 @@ export const menuDomManipulation = (function () {
             deleteProjImg.alt = 'delete project icon';
             deleteProjNode.appendChild(deleteProjImg);
 
-            liNode.append(projectImg, projectNameMode, changeProjNode, deleteProjNode);
+            liNode.append(projectImg, projectNameMode, todoCountNode, changeProjNode, deleteProjNode);
             projectDiv.appendChild(liNode);
         }
+        window.localStorage.setItem('MyProjects', JSON.stringify(projects));
         
         if (called) {
             toDosContent.initialTodos()
@@ -143,8 +155,40 @@ export const menuDomManipulation = (function () {
             projectsModule.initial()
         })
     }*/
+    function resetHomeTodoCount(){
+        const homeTodoCount = document.querySelector('.todo-count-home');
+        homeTodoCount.textContent = 0;
+    }
+    function updateHomeTodoCount() {
+
+        const homeTodoCount = document.querySelector('.todo-count-home');
+        homeTodoCount.textContent = +homeTodoCount.textContent + 1;
+    }
+    function resetProjTodoCount() {
+        const currentProj = document.querySelector('.content-header h2').textContent;
+        const projects = document.querySelectorAll('.projects-content li');
+            projects.forEach((project) => {
+                if (project.querySelector('.project-name-node').textContent === currentProj) {
+                    const projTodoCount = project.querySelector('.todo-count');
+                    projTodoCount.textContent = 0;
+                }
+            })
+    }
+    function updateProjTodoCount(todo){
+        const currentProj = document.querySelector('.content-header h2').textContent;
+        if (currentProj !== 'Home' && currentProj === todo.project) {
+            const projects = document.querySelectorAll('.projects-content li');
+            projects.forEach((project) => {
+                if (project.querySelector('.project-name-node').textContent === currentProj) {
+                    const projTodoCount = project.querySelector('.todo-count');
+                    projTodoCount.textContent = +projTodoCount.textContent +1;
+                }
+            })
+        }
+    }
+
     renderProjects()
-    return { toogleProjects, toogleAddProjForm, cancelAddProj, addProject, deleteProjectFromEvent, //changeProjName 
+    return { resetHomeTodoCount, updateHomeTodoCount, resetProjTodoCount, updateProjTodoCount, toogleProjects, toogleAddProjForm, cancelAddProj, addProject, deleteProjectFromEvent, //changeProjName 
     }
 })()
 
@@ -162,10 +206,20 @@ export const contentDomManipulation = (function () {
             this.parentNode.querySelector('button').classList.add('active');
             contentHeader.textContent = this.parentNode.querySelector('button').textContent;
         }
+        toDosContent.changedProject(this.parentNode.querySelector('button').textContent);
+    }
+    function cleanTodoNodes() {
+        const currentTodos = document.querySelectorAll('.to-dos li');
+        currentTodos.forEach((todo) => {
+            todo.remove()
+        })
     }
     function renderTodo(todo){
+        const projectName = document.querySelector('.content h2').textContent;
+        if(todo.project !== projectName && projectName !== 'Home'){return}
         const todoContainer = document.querySelector('div.to-dos');
         const todoNode = document.createElement('li');
+        todoNode.setAttribute('id', todo.id)
 
         const completeButton = document.createElement('button');
         completeButton.classList.add('todo-checkbox');
@@ -181,43 +235,117 @@ export const contentDomManipulation = (function () {
 
         const changeTodoButton = document.createElement('button');
         changeTodoButton.classList.add('btn', 'change-todo-btn');
+        changeTodoButton.title = 'Change this todo';
         const changeTodoButtonImg = document.createElement('img');
         changeTodoButtonImg.classList.add('todo-img');
-        changeTodoButtonImg.setAttribute('src','./img/change.png' )
+        changeTodoButtonImg.setAttribute('src','./img/change.png' );
         changeTodoButtonImg.alt = 'change todo imgage';
         changeTodoButton.appendChild(changeTodoButtonImg);
 
         const deleteTodoButton = document.createElement('button');
         deleteTodoButton.classList.add('btn', 'delete-todo-btn');
+        deleteTodoButton.title = 'Delete this todo';
         const deleteTodoButtonImg = document.createElement('img');
         deleteTodoButtonImg.classList.add('todo-img');
-        deleteTodoButtonImg.setAttribute('src','./img/delete.png' )
+        deleteTodoButtonImg.setAttribute('src','./img/delete.png' );
         deleteTodoButtonImg.alt = 'delete todo imgage';
         deleteTodoButton.appendChild(deleteTodoButtonImg);
 
+        if(todo.completed === true){
+            completeButton.classList.add('completed-todo');
+            todoText.classList.add('completed-todo-text');
+        }
+
         todoNode.append(completeButton, todoText, todoDate, changeTodoButton, deleteTodoButton);
         todoContainer.appendChild(todoNode);
+        todoCompletedEvent()
+        toDosContent.deleteTodoEvent()
+        toDosContent.changeTodoEvent()
+        dateChangeEvent()
     } 
+    function dateChangeEvent() {
+        const dates = document.querySelectorAll('.todo-date');
+        dates.forEach((date) => {
+            if (date.getAttribute('listener') !== 'true'){
+                date.setAttribute('listener', 'true');
+                date.addEventListener('input', () => {
+                    toDosContent.updateDate(date.parentNode.getAttribute('id'), date.value)
+            })  
+            }
+          
+        })
+    }
     function todoCompletedEvent(){
         const todosCheckbox = document.querySelectorAll('.todo-checkbox');
         todosCheckbox.forEach((checkbox) => {
+            if (checkbox.getAttribute('listener') !== 'true') {
+            checkbox.setAttribute('listener', 'true');
             checkbox.addEventListener('click', (e) => {
+                if(!e.target.parentNode.querySelector('.todo-text')){return};
                 checkbox.classList.toggle('completed-todo');
+
+                if (checkbox.classList.contains('completed-todo')) {
+                    const toDoId =  e.target.parentNode.getAttribute('id');
+                    toDosContent.updateCompleted(toDoId);
+                }
+                else {
+                    const toDoId =  e.target.parentNode.getAttribute('id');
+                    toDosContent.updateUnCompleted(toDoId);
+                }
                 e.target.parentNode.querySelector('.todo-text').classList.toggle('completed-todo-text')
-            })
+            })}
+
         })
     }
     function changeTodo() {
-        console.log(this);
+        const oldDescriptionNode = this.parentNode.querySelector('p').cloneNode(true);
+        const oldDescription = this.parentNode.querySelector('p').textContent;
+        const newDescInput = document.createElement('input');
+        newDescInput.type = 'text';
+        newDescInput.value = oldDescription;
+        newDescInput.classList.add('new-proj-name');
+        this.parentNode.querySelector('p').replaceWith(newDescInput);
+
+        const oldChangeButton = this.parentNode.querySelector('.change-todo-btn');
+        const newAcceptButton = oldChangeButton.cloneNode(true);
+        oldChangeButton.classList.toggle('hidden');
+        newAcceptButton.querySelector('img').src = './img/check.png';
+        newAcceptButton.classList.add('accept-desc-change');
+
+        const oldDeleteButton = this.parentNode.querySelector('.delete-todo-btn');
+        const newCancelButton = oldDeleteButton.cloneNode(true);
+        oldDeleteButton.classList.toggle('hidden');
+        newCancelButton.querySelector('img').src = './img/close.png';
+        newCancelButton.classList.add('cancel-desc-change');
+        this.parentNode.append(newAcceptButton, newCancelButton);
+
+        newAcceptButton.addEventListener('click', () => {
+            if(newDescInput.value === ''){return};
+            const changedTodoId = this.parentNode.getAttribute('id');
+            const newDescription = newDescInput.value;
+            toDosContent.updateTodoDesc(changedTodoId, newDescription);
+        })
+        newCancelButton.addEventListener('click', () => {
+            newDescInput.replaceWith(oldDescriptionNode);
+            oldChangeButton.classList.toggle('hidden');
+            oldDeleteButton.classList.toggle('hidden');
+            newAcceptButton.remove();
+            newCancelButton.remove()
+        })
     }
     function toogleAddTodo(){
         const modal = document.querySelector('.modal');
         modal.classList.toggle('hidden');
-        window.addEventListener('click', (e)=> {
-            if (e.target === modal) {
-                toogleAddTodo()
-            }
-        })
+        const addTodoBody = document.querySelector('.modal-content');
+        if (modal.getAttribute('listener') !== 'true') {
+            modal.setAttribute('listener', 'true')
+               modal.addEventListener('click',(e) => {
+            if(e.target !== modal){return}
+            else {toogleAddTodo()}
+        } )
+        }
+     
+
     }
     function cancelAddTodo() {
         const descrInput = document.querySelector('#new-todo-name');
@@ -229,18 +357,16 @@ export const contentDomManipulation = (function () {
     function addNewTodo() {
         const text = document.querySelector('#new-todo-name').value;
         const date = document.querySelector('#new-todo-date').value;
+        const project = document.querySelector('.content-header h2').textContent;
         if (text === '' || date === '') {return}
         cancelAddTodo();
-        return {text, date};
+        const id = Math.random().toString(16).slice(2);
+        return {text, date, id, project};
     }
     function initial(){
         todoCompletedEvent()
     }
-    return { changeHeader, initial, addNewTodo, changeTodo, renderTodo, toogleAddTodo, cancelAddTodo}
+    return { changeHeader,  cleanTodoNodes, initial, addNewTodo, changeTodo, renderTodo, toogleAddTodo, cancelAddTodo}
 })()
 contentDomManipulation.initial()
-const exampleTodo = {
-    text : 'Example plis work!',
-    date : '2018-07-22'
-}
-contentDomManipulation.renderTodo(exampleTodo)
+

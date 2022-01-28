@@ -38,7 +38,7 @@ export const projectsModule =  (function projects() {
 
     function initial() {
         deleteProjectEvent()
-        changeProjectEvent()
+        //changeProjectEvent()
     }
     return{initial}
 })()
