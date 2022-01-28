@@ -94,6 +94,7 @@ h2.proj-header {
     background: transparent;
     border: none;
     border-bottom: 2px solid;
+    font-family: inherit;
 }
 .new-proj-name:active, .new-proj-name:focus{
     outline: none;
