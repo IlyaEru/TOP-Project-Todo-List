@@ -1,109 +1,91 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <link rel="icon" href="./img/icon.png" />
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>To Do</title>
-    <script src="main.js" defer></script>
-    <link rel="stylesheet" href="style.css" />
-  </head>
 
-  <body>
-    <header>
-      <img class="icon" src="./img/icon.png" alt="site icon" />
-      <h1 class="hero">Just TODO it</h1>
-    </header>
-    <main>
-      <div class="menu">
-        <div class="home-container">
-          <img class="menu-img" src="./img/home.png" alt="home image" />
-          <button class="home-btn btn active">Home</button
-          ><span class="todo-count todo-count-home">2</span>
-        </div>
+<head>
+  <link rel="icon" href="./img/icon.png" />
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>To Do</title>
+  <script src="main.js" defer></script>
+  <link rel="stylesheet" href="style.css" />
+</head>
 
-        <div class="proj-header-container">
-          <button class="btn show-proj" id="direc-img-btn">
-            <img
-              class="menu-img proj-direction-img direc-right"
-              src="./img/right.png"
-              alt="projects icon"
-            />
-          </button>
-          <button class="btn show-proj" id="projects-btn">
-            <h2 class="proj-header">Projects</h2>
-          </button>
-          <button
-            id="add-proj-btn"
-            title="Add new project"
-            class="btn add-proj-btn"
-          >
-            <img
-              class="menu-img"
-              src="./img/plus.png"
-              alt="add project button"
-            />
-          </button>
-        </div>
-        <ul class="projects-content projects-close"></ul>
-
-        <form class="new-proj-form hidden">
-          <h3 class="new-proj-header">Add new project</h3>
-          <div class="input">
-            <input type="text" maxlength="24" id="proj-name" required />
-            <label for="proj-name">Project Name</label>
-          </div>
-          <div class="add-proj-btns">
-            <button class="btn cancel-btn">Cancel</button
-            ><button class="btn" type="submit">Add</button>
-          </div>
-        </form>
+<body>
+  <header>
+    <img class="icon" src="./img/icon.png" alt="site icon" />
+    <h1 class="hero">Just TODO it</h1>
+  </header>
+  <main>
+    <div class="menu">
+      <div class="home-container">
+        <img class="menu-img" src="./img/home.png" alt="home image" />
+        <button class="home-btn btn active">Home</button><span class="todo-count todo-count-home">2</span>
       </div>
 
-      <div class="content">
-        <div class="content-header">
-          <h2>Home</h2>
-          <button class="btn sort-btn">
-            Sort<img
-              class="sort-img"
-              src="./img/down.png"
-              alt="sort todos image"
-            />
-          </button>
-          <button class="btn add-todo-btn">
-            <img class="add-todo-img" src="./img/plus.png" alt="add new todo" />
-          </button>
-        </div>
-        <div class="modal hidden" id="new-todo-modal">
-          <div class="modal-content">
-            <form class="new-todo-form">
-              <h3 class="new-todo-header">Add new Todo</h3>
-              <div class="input">
-                <input type="text" id="new-todo-name" required />
-                <label class="name-label" for="new-todo-name"
-                  >Description</label
-                >
-              </div>
-              <div class="input">
-                <input type="date" value="2022-01-01" id="new-todo-date" />
-                <label class="date-label" for="new-todo-date">Date</label>
-              </div>
-              <div class="new-todo-btns">
-                <button class="btn cancel-new-todo">Cancel</button>
-                <button class="btn add-new-todo">Add</button>
-              </div>
-            </form>
-          </div>
-        </div>
-        <div class="to-dos"></div>
+      <div class="proj-header-container">
+        <button class="btn show-proj" id="direc-img-btn">
+          <img class="menu-img proj-direction-img direc-right" src="./img/right.png" alt="projects icon" />
+        </button>
+        <button class="btn show-proj" id="projects-btn">
+          <h2 class="proj-header">Projects</h2>
+        </button>
+        <button id="add-proj-btn" title="Add new project" class="btn add-proj-btn">
+          <img class="menu-img" src="./img/plus.png" alt="add project button" />
+        </button>
       </div>
-    </main>
-    <footer>
-      <a href="https://github.com/IlyaEru"
-        ><img src="img/github.png" alt="github link"
-      /></a>
-      <a class="gitHub-name" href="https://github.com/IlyaEru">IlyaEru</a>
-    </footer>
-  </body>
+      <ul class="projects-content projects-close"></ul>
+
+      <form class="new-proj-form hidden">
+        <h3 class="new-proj-header">Add new project</h3>
+        <div class="input">
+          <input type="text" maxlength="24" id="proj-name" required />
+          <label for="proj-name">Project Name</label>
+        </div>
+        <div class="add-proj-btns">
+          <button class="btn cancel-btn">Cancel</button><button class="btn" type="submit">Add</button>
+        </div>
+      </form>
+    </div>
+
+    <div class="content">
+      <div class="content-header">
+        <h2>Home</h2>
+        <button class="btn sort-btn">
+          Sort<img class="sort-img" src="./img/down.png" alt="sort todos image" />
+        </button>
+        <button class="btn add-todo-btn">
+          <img class="add-todo-img" src="./img/plus.png" alt="add new todo" />
+        </button>
+      </div>
+      <div class="modal hidden" id="new-todo-modal">
+        <div class="modal-content">
+          <form class="new-todo-form">
+            <h3 class="new-todo-header">Add new Todo</h3>
+            <div class="input desc-input">
+              <input type="text"  id="new-todo-name" maxlength="30" required />
+              <label class="name-label" for="new-todo-name">Description <span class="required-label">(Required)</span></label>
+            </div>
+            <p class="todo-name-error"></p>
+            <div class="input date-input">
+              <input type="date" value="2022-01-01" id="new-todo-date" />
+              <label class="date-label" for="new-todo-date">Date <span class="required-label">(Required)</span></label>
+            </div>
+            <p class="todo-date-error"></p>
+            <div class="new-todo-btns">
+              <button class="btn cancel-new-todo">Cancel</button>
+              <button class="btn add-new-todo">Add</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="to-dos"></div>
+    </div>
+  </main>
+  <footer>
+    <a href="https://github.com/IlyaEru"><img src="img/github.png" alt="github link" /></a>
+    <a class="gitHub-name" href="https://github.com/IlyaEru">IlyaEru</a>
+  </footer>
+</body>
+
 </html>

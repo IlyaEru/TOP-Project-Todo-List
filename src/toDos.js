@@ -98,9 +98,18 @@ export const toDosContent = (function () {
       }
     });
   }
+  const newTodoDescriptionInput = document.querySelector('#new-todo-name');
+  newTodoDescriptionInput.addEventListener('input', () => {
+    contentDomManipulation.resetDescriptionError();
+  });
+  const newTodoDateInput = document.querySelector('#new-todo-date');
+  newTodoDateInput.addEventListener('input', () => {
+    contentDomManipulation.resetDateError();
+  });
   addNewTodoBtn.addEventListener('click', (e) => {
     e.preventDefault();
     const newTodo = contentDomManipulation.addNewTodo();
+    contentDomManipulation.addTodoFormValidation();
     if (newTodo == undefined) {
       return;
     }

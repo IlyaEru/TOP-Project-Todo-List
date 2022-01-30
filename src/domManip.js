@@ -385,6 +385,7 @@ export const contentDomManipulation = (function todosDomManipulation() {
     });
   }
   function toogleAddTodo() {
+    resetDescriptionError()
     const modal = document.querySelector('.modal');
     modal.classList.toggle('hidden');
     if (modal.getAttribute('listener') !== 'true') {
@@ -403,6 +404,34 @@ export const contentDomManipulation = (function todosDomManipulation() {
     descrInput.value = '';
     dateInput.value = '2022-01-01';
     toogleAddTodo();
+  }
+  function addTodoFormValidation() {
+    const descriptionInput = document.querySelector('#new-todo-name');
+    const descriptionError = document.querySelector('.todo-name-error');
+    if (descriptionInput.checkValidity() === false) {
+      descriptionError.textContent = descriptionInput.validationMessage;
+      descriptionError.classList.add('active-error');
+      descriptionInput.classList.add('invalid-desc');
+    }
+    const dateInput = document.querySelector('#new-todo-date');
+    const dateError = document.querySelector('.todo-date-error');
+    if (dateInput.checkValidity() === false) {
+      dateError.textContent = 'Please enter a valid date';
+      dateError.classList.add('active-error');
+      dateInput.classList.add('invalid-desc');
+    }
+  }
+  function resetDescriptionError() {
+    const descriptionError = document.querySelector('.todo-name-error');
+    const descriptionInput = document.querySelector('#new-todo-name');
+    descriptionError.classList.remove('active-error');
+    descriptionInput.classList.remove('invalid-desc');
+  }
+  function resetDateError() {
+    const dateError = document.querySelector('.todo-date-error');
+    const dateInput = document.querySelector('#new-todo-date');
+    dateError.classList.remove('active-error');
+    dateInput.classList.remove('invalid-desc');
   }
   function addNewTodo() {
     const text = document.querySelector('#new-todo-name').value;
@@ -427,6 +456,9 @@ export const contentDomManipulation = (function todosDomManipulation() {
     renderTodo,
     toogleAddTodo,
     cancelAddTodo,
+    addTodoFormValidation,
+    resetDescriptionError,
+    resetDateError,
   };
 }());
 contentDomManipulation.initial();

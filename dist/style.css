@@ -163,6 +163,7 @@ ul li {
   width: 100%;
   display: flex;
   align-items: center;
+  margin: 1vw 0;
 }
 #proj-name {
   height: 2vw;
@@ -253,11 +254,10 @@ form.hidden {
 form.new-todo-form {
   display: flex;
   flex-direction: column;
-  gap: 2vw;
 }
 .new-todo-header {
   border-bottom: 1px solid;
-  margin-bottom: 0;
+  margin-bottom: 0.5vw;
 }
 .input input {
   width: 100%;
@@ -276,6 +276,31 @@ label {
 #new-todo-name:valid ~ .name-label {
   transform: translateY(-1.5vw);
 }
+#new-todo-name.invalid-desc{
+  border: 1px dashed red;
+}
+.todo-name-error, .todo-date-error {
+  margin: 0;
+  font-size: 1.3vw;
+  display: none;
+}
+.todo-name-error.active-error, .todo-date-error.active-error{
+  display: block;
+  background: #cd5c5ca1;
+  border-radius: 0 0 10px 10px;
+  color: blue;
+}
+.input.desc-input {
+  margin-bottom: 0;
+}
+.date-input {
+  margin-top: 2vw;
+  margin-bottom: 0;
+}
+.required-label {
+  font-weight: 100;
+  opacity: 0.6;
+}
 label.date-label {
   transform: translateY(-1.5vw);
 }
@@ -283,6 +308,7 @@ label.date-label {
   display: flex;
   gap: 2vw;
   justify-content: center;
+  margin-top: 1vw;
 }
 .new-todo-btns button {
   border: 2px solid darksalmon;
