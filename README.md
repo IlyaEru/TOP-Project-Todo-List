@@ -22,6 +22,7 @@
 - <a href="https://github.com/IlyaEru/TOP-React-Project-CV-Application">Fourteenth Project - CV Application</a> [HTML | CSS | JavaScript + React]
 - <a href="https://github.com/IlyaEru/TOP-React-Project-Memory-Card">Fifteenth Project - Memory Card</a> [HTML | SASS | JavaScript + React]
 - <a href="https://github.com/IlyaEru/TOP-React-Project-Shopping-Cart">Sixteenth Project - Shopping Cart</a> [HTML | SASS | JavaScript + React]
+- <a href="https://github.com/IlyaEru/TOP-React-Project-Where-Is-Waldo">Seventeenth Project - Where's Waldo</a> [HTML | SASS | TypeScript + React | Firebase]
 
 ## QA
 
